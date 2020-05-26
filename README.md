@@ -31,7 +31,7 @@ After successfully installing the Hershey-Font package, you can run the module f
 python3 -m HersheyFonts
 
 #python 2.7
-python3 -m HersheyFonts
+python -m HersheyFonts
 ```
 
 ### Built-in fonts
