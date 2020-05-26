@@ -47,9 +47,10 @@ thefont.read_from_string_lines(arrayofstrings)
 ```
 For more details and all options see doc comments in the sources.
 ### Renderig the loaded font
-There are several options to convert a text to font data. The simplest way is to read endpoints of the lines returned by renderer method `.lines_for_text(sometext)`<br/> There are renderer methods returning list of glyps, list of strokes and list of line endpoints.
+There are several options to convert a text to font data. The simplest way is to read endpoints of the lines returned by renderer method `.lines_for_text(sometext)`<br/> 
+There are renderer methods returning list of glyps, list of strokes and list of line endpoints.
 > The renderers in version 1.0.0 support only single line texts.
-> Rendering is also affected by `.render_options` property
+> Rendering is also affected by `.render_options` property.<br/>
 > There is a `.normalize_rendering()` method to automatically set the scaling and offsets for easy rendering.
 ```Python
 # Minimalistic code for easy start
