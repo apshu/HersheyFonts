@@ -11,9 +11,9 @@ The main use today if for generating text for CNC engraving.
 ## Overview
 Hershey font consists of _glyphs_, each _glyph_ is assigned to an ASCII value from 32 (`'space'`) until 32+number of _glyphs_.<br/>Each _glyph_ consits of array of **strokes**.<br/>A **stroke** is an array of zero or more continous lines (points of an openend or closed ploygon).
 ## The Python module
-The Hershey-Font package is providing the `HersheyFont` class.<br/>
+The Hershey-Font package is providing the `HersheyFonts` class.<br/>
 Great care was taken to be compatible with defulat installation of python 2.7 and python 3.<br/>
-The `HersheyFont` instance is handling only one font at a time. If you need to use multiple type faces as the same time, you can load a new typeface anytime (even during rendering) or create another `HersheyFont` instance.
+The `HersheyFonts` instance is handling only one font at a time. If you need to use multiple type faces as the same time, you can load a new typeface anytime (even during rendering) or create another `HersheyFonts` instance.
 ### Installing
 Sources available on [GitHub](https://github.com/apshu/HersheyFonts) 
 Installation is available through pip and pip3
