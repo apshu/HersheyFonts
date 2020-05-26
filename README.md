@@ -29,7 +29,7 @@ The module can also load default fonts or from file and iterable string lines.
 When you make your own font and want to include in the package, please contact me.
 You can get the list of built-in fonts by looking at 
 ```Python
-import HersheyFonts
+from HersheyFonts import HersheyFonts
 
 print(HersheyFonts().default_font_names)
 ```
@@ -37,7 +37,7 @@ The order and elements of the list may totally vary with any package release.
 ### Loading a font
 To access one of the built-in fonts, use the  `.load_default_font()` method. To read custome fonts you can call the `.load_font_file(file_name)` or `.read_from_string_lines(stringlines)` methods. The constructor also gives opportunity to read built-in or external font.
 ```Python
-import HersheyFonts
+from HersheyFonts import HersheyFonts
 thefont = HersheyFonts()
 thefont.load_default_font('gothiceng')
 thefont.load_default_font(thefont.default_font_names[0])
@@ -53,7 +53,7 @@ There are several options to convert a text to font data. The simplest way is to
 > There is a `.normalize_rendering()` method to automatically set the scaling and offsets for easy rendering.
 ```Python
 # Minimalistic code for easy start
-import HersheyFonts
+from HersheyFonts import HersheyFonts
 def draw_line(x1, y1, x2, y2):
 ︙
 ︙
