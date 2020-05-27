@@ -78,5 +78,5 @@ for (x1, y1), (x2, y2) in thefont.lines_for_text('Hello'):
 ```
 ## The Hershey-Font API
 The API is documented in the source code. 
-## Thank you
+# Thank you
 Big thanks to all people working on maintaining this old format for the modern age.
