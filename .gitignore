@@ -2,3 +2,4 @@ Hershey_Fonts.egg-info
 dist
 build
 __pycache__
+*.pyc
