@@ -6,12 +6,19 @@ os:
 #- windows
 #- osx
 
-#_test_tools_job: &test_tools
-# script: python -tt -m compileall -f HersheyFonts_tools
 python:
 - '2.7'
 - '3.8'
 
+matrix:
+ include:
+  - python: '3.8'
+    name: 'Testing auxiliary tools'
+    script: python -tt -m compileall -f HersheyFonts_tools
+
 script:
 - python -tt -m compileall -f HersheyFonts
 - python setup.py sdist
+
+notifications:
+  email: false
