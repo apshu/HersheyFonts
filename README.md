@@ -1,5 +1,9 @@
 # Hershey Font
-Hershey font is a python library with built in fonts and low level line and stroke iterators.
+[![Python version](https://img.shields.io/pypi/pyversions/Hershey-Fonts)](https://pypi.org/project/Hershey-Fonts/)
+[![PyPi version](https://img.shields.io/pypi/v/Hershey-Fonts)](https://pypi.org/project/Hershey-Fonts/)
+[![CodeFactor](https://www.codefactor.io/repository/github/apshu/hersheyfonts/badge/master)](https://www.codefactor.io/repository/github/apshu/hersheyfonts/overview/master)
+[![Build Status](https://travis-ci.com/apshu/HersheyFonts.svg?branch=master)](https://travis-ci.com/apshu/HersheyFonts)
+<br/>Hershey font is a python library with built in fonts and low level line and stroke iterators.
 
 ## What is Hershey Font?
 Hershey font is a vector font, designed many years ago.
