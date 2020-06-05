@@ -1,0 +1,7 @@
+language:
+- python
+
+os:
+- linux
+- windows
+- osx
