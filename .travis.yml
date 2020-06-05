@@ -1,24 +1,24 @@
 language:
-- python
+  - python
 
 os:
-- linux
+  - linux
 #- windows
 #- osx
 
 python:
-- '2.7'
-- '3.8'
+  - '2.7'
+  - '3.8'
 
 matrix:
- include:
-  - python: '3.8'
-    name: 'Testing auxiliary tools'
-    script: python -tt -m compileall -f HersheyFonts_tools
+  include:
+    - python: '3.8'
+      name: 'Testing auxiliary tools'
+      script: python -tt -m compileall -f HersheyFonts_tools
 
 script:
-- python -tt -m compileall -f HersheyFonts
-- python setup.py sdist
+  - python -tt -m compileall -f HersheyFonts
+  - python setup.py sdist
 
 notifications:
   email: false
