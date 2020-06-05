@@ -43,8 +43,7 @@ def decode_bytes_from_hershey_fonts_internal():
                 if hasattr(base64, 'b' + enc + 'decode'):
                     decoded = getattr(base64, 'b' + enc + 'decode')(getattr(font, attribute_name + enc))
                     return 'default_fonts', bytes(decoded)
-                else:
-                    return None, f'Variable found with unsupported encoding: base{enc}'
+                return None, f'Variable found with unsupported encoding: base{enc}'
         return None, 'Variable not found in HersheyFonts'
 
 
