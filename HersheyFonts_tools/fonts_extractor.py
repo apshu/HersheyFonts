@@ -27,8 +27,7 @@ def decode_bytes_from_file(the_file: TextIOWrapper, search_variable_name: str):
             if hasattr(base64, 'b' + enc + 'decode'):
                 decoded = getattr(base64, 'b' + enc + 'decode')(var_found[1])
                 return var_base_name, bytes(decoded)
-            else:
-                return None, f'Variable found with unsupported encoding: base{enc}'
+            return None, f'Variable found with unsupported encoding: base{enc}'
     return None, 'Variable not found'
 
 
