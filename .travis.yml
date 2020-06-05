@@ -3,5 +3,14 @@ language:
 
 os:
 - linux
-- windows
-- osx
+#- windows
+#- osx
+
+python:
+- '2.7'
+- '3.8'
+
+script:
+- python -tt -m compileall -f HersheyFonts
+- python -tt -m compileall -f HersheyFonts_tools
+- python setup.py sdist
