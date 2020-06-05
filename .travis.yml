@@ -6,11 +6,12 @@ os:
 #- windows
 #- osx
 
+#_test_tools_job: &test_tools
+# script: python -tt -m compileall -f HersheyFonts_tools
 python:
 - '2.7'
 - '3.8'
 
 script:
 - python -tt -m compileall -f HersheyFonts
-- python -tt -m compileall -f HersheyFonts_tools
 - python setup.py sdist
