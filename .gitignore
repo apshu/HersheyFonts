@@ -1,5 +1,6 @@
-Hershey_Fonts.egg-info
+*.egg-info
 dist
 build
 __pycache__
 *.pyc
+.idea
