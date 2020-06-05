@@ -4,6 +4,7 @@ import os
 import re
 import shutil
 import tarfile
+import importlib
 from io import BytesIO
 
 
@@ -115,13 +116,14 @@ def do_all(cmdline_params):
     print("# Verification")
     _locals = {}
     print(f'Loading "{resource_file_name}.py" ', end='... ')
-    exec(open(resource_file_name + '.py').read(), {}, _locals)
+    resource_file_module = importlib.import_module(resource_file_name)
+    _locals = dir(resource_file_module)
     print('OK')
     print(f'Checking if variable created: ', end='... ')
     if f'compressed_fonts_{parsed_command_line.encoding}' in _locals:
         print('OK')
         print('# Comparing variable and original resources')
-        ver_result, num_verified = verify_resources(_locals[f'compressed_fonts_{parsed_command_line.encoding}'])
+        ver_result, num_verified = verify_resources(getattr(resource_file_module, f'compressed_fonts_{parsed_command_line.encoding}'))
         print("# Verification result: ", 'OK' if ver_result else 'FAIL!!!')
         print(f'''DONE. Summary: 
          - resource encoding: {parsed_command_line.encoding}
