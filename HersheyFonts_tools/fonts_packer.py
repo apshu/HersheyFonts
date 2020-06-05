@@ -71,8 +71,7 @@ def inject_python_resource(compressed_bytes, inject_file):
         inject_file.write(result)
         print('OK')
         return True
-    else:
-        print('Pattern not found ... Fail')
+    print('Pattern not found ... Fail')
     return False
 
 
