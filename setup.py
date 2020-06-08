@@ -9,7 +9,7 @@ with io.open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="Hershey Fonts",
-    version="1.7.0",
+    version="1.8.0",
     author="Attila",
     author_email="attila.kolinger@gmail.com",
     description="Vector font package with built-in fonts and font rendering iterators",
