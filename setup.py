@@ -1,12 +1,15 @@
 import setuptools
 import io
+import re
 
 with io.open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
+    regex = r"\[!\[(.*?)\].*?\].*?\)\n*"
+    long_description = re.sub(regex, '', long_description)
 
 setuptools.setup(
     name="Hershey Fonts",
-    version="1.1.0",
+    version="1.7.0",
     author="Attila",
     author_email="attila.kolinger@gmail.com",
     description="Vector font package with built-in fonts and font rendering iterators",
@@ -14,6 +17,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/apshu/HersheyFonts",
     packages=setuptools.find_packages(),
+    license="MIT License",
+    platforms=['all'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 2.7",
