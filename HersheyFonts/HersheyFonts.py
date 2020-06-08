@@ -535,7 +535,7 @@ def main_script(thefont=HersheyFonts()):
         fontname2 = '' if fontname2 is None else '- "' + fontname2 + '"'
         fontname1 = '' if fontname1 is None else '"' + fontname1 + '"'
         print(' - {0:<25} {1}'.format(fontname1, fontname2))
-    print(f'Default font: "{thefont.load_default_font()}"')
+    print('Default font: "{0}"'.format(thefont.load_default_font()))
     print('')
     print('Rendering options:')
     for optname, defval in thefont.render_options.items():
