@@ -333,7 +333,7 @@ cap_line=-12, base_line= 9, bottom_line= 16'''
         self.render_options.xofs = 0
 
     def load_default_font(self, default_font_name=''):
-        '''load built-in font by name'''
+        '''load built-in font by name. If default_font_name not specified, selects the predefined default font. The routine is returning the name of the loaded font.'''
         if not default_font_name:
             default_font_name = self.default_font_names[0]
         if default_font_name in self.default_font_names:

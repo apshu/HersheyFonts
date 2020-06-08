@@ -56,7 +56,7 @@ from HersheyFonts import HersheyFonts
 thefont = HersheyFonts()
 thefont.load_default_font('gothiceng')
 thefont.load_default_font(thefont.default_font_names[0])
-thefont.load_default_font() #Use with caution
+thefont.load_default_font() #Returns the name of the loaded font
 thefont.load_font_file('cyrillic.jhf')
 thefont.read_from_string_lines(arrayofstrings)
 ```
