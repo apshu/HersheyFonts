@@ -1,10 +1,10 @@
 import argparse
 import base64
+import importlib
 import os
 import re
 import shutil
 import tarfile
-import importlib
 from io import BytesIO
 
 
@@ -33,14 +33,26 @@ def get_string_to_inject(bytes_array):
 
 def create_compressed_data():
     compressed_file_stream = BytesIO()
+    files_in_folder = sorted(os.listdir())
+    ci_files_dict = dict(zip(map(str.casefold, files_in_folder), files_in_folder))
+    if len(ci_files_dict) != len(files_in_folder):
+        print('###Warning, some files differ only in letter case. Duplicates eliminated!')
+    ci_fonts_in_folder = list(filter(lambda file_name: file_name.endswith('.jhf'.casefold()), ci_files_dict.keys()))
+    ci_default_font_file = 'futural.jhf'.casefold()
+    ci_default_font_file = ci_default_font_file if ci_default_font_file in ci_fonts_in_folder else ci_fonts_in_folder[0]
+    if parsed_command_line.default_font:
+        parsed_command_line.default_font.close()
+        ci_default_font_file = parsed_command_line.default_font.name.casefold()
+    ci_fonts_in_folder.remove(ci_default_font_file)
+    ci_fonts_in_folder.insert(0,ci_default_font_file)
     with tarfile.open(fileobj=compressed_file_stream, format=tarfile.GNU_FORMAT, mode='w|' + parsed_command_line.compression) as tar:
-        for file_name in os.listdir():
-            if file_name.casefold().endswith('.JHF'.casefold()):
-                font_name = file_name[:-4]
-                print(f'Adding font: "{file_name}" → "{font_name}" ', end='... ')
-                tar.add(file_name, arcname=font_name)
-                print('OK')
-    return compressed_file_stream.getvalue()
+        print(f'Using default font file: "{ci_files_dict[ci_default_font_file]}"')
+        for ci_file_name in ci_fonts_in_folder:
+            font_name = os.path.splitext(ci_files_dict[ci_file_name])[0]
+            print(f'Adding font: "{ci_files_dict[ci_file_name]}" → "{font_name}" ', end='... ')
+            tar.add(ci_file_name, arcname=font_name)
+            print('OK')
+    return compressed_file_stream.getvalue(), ci_files_dict[ci_default_font_file]
 
 
 def write_tarfile(compressed_bytes, file_name='hershey_font_resource.tar'):
@@ -102,7 +114,7 @@ def do_all(cmdline_params):
     resource_file_name = parsed_command_line.output
     inject_ok = None
     print("# Create compressed data")
-    compressed_bytes = create_compressed_data()
+    compressed_bytes, default_font_file_name = create_compressed_data()
     print("# Compressed data created")
     write_tarfile(compressed_bytes, resource_file_name + '.tar')
     write_python_resource(compressed_bytes, file_name=resource_file_name + '.py')
@@ -126,6 +138,7 @@ def do_all(cmdline_params):
         ver_result, num_verified = verify_resources(getattr(resource_file_module, f'compressed_fonts_{parsed_command_line.encoding}'))
         print("# Verification result: ", 'OK' if ver_result else 'FAIL!!!')
         print(f'''DONE. Summary: 
+         - default font file: {default_font_file_name}
          - resource encoding: {parsed_command_line.encoding}
          - compressed file: "{parsed_command_line.output}.tar"
          - python file: "{parsed_command_line.output}.py"
@@ -158,6 +171,7 @@ def get_default_encoding():
 if __name__ == '__main__':
     cmdline_parser = argparse.ArgumentParser(description='Compress *.jhf fonts in found in the current folder, create .py with inline data and optionally inject the new data into an existing class.')
     cmdline_parser.add_argument('-it', '--inject_to', type=argparse.FileType('r+'), help='Filename to inject compressed data to')
+    cmdline_parser.add_argument('-df', '--default_font', type=argparse.FileType('r+'), help="Default font file name (Default: try 'futural')")
     cmdline_parser.add_argument('-e', '--encoding', choices=get_list_of_encodings(), default=get_default_encoding(), help=f'Encoding used for the compressed data (Default:{get_default_encoding()})')
     cmdline_parser.add_argument('-o', '--output_base', dest='output', default='hershey_font_resource', help='Output base name for generated resources (Default: hershey_font_resource)')
     cmdline_parser.add_argument('-c', '--compression', choices=get_compress_methods(), default=get_default_compress_method(), help=f'Output compression type (Default:{get_default_compress_method()})')
