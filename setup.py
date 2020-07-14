@@ -1,6 +1,7 @@
 import setuptools
 import io
 import re
+import HersheyFonts
 
 with io.open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
@@ -9,7 +10,7 @@ with io.open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="Hershey Fonts",
-    version="1.8.0",
+    version=HersheyFonts.__version__,
     author="Attila",
     author_email="attila.kolinger@gmail.com",
     description="Vector font package with built-in fonts and font rendering iterators",
