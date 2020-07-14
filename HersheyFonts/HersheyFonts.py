@@ -364,6 +364,7 @@ Parameters:
         cap_line = None
         base_line = None
         bottom_line = None
+        aglyph = None
         if not merge_existing:
             self.__glyphs = {}
         if data_iterator:
@@ -377,13 +378,17 @@ Parameters:
                         base_line = extraparams['define_base_line']
                     if 'define_bottom_line' in extraparams:
                         bottom_line = extraparams['define_bottom_line']
-                aglyph = _HersheyGlyph(data_line=line, default_base_line=base_line, default_bottom_line=bottom_line, default_cap_line=cap_line)
+                if aglyph:
+                    aglyph.parse_string_line(line)
+                else:
+                    aglyph = _HersheyGlyph(data_line=line, default_base_line=base_line, default_bottom_line=bottom_line, default_cap_line=cap_line)
                 if line[0] != '#':
                     glyph_key = chr(aglyph.font_charcode if use_charcode else glyph_ascii_code)
                     self.__glyphs[glyph_key] = aglyph
                     cap.append(aglyph.cap_line)
                     base.append(aglyph.base_line)
                     bottom.append(aglyph.bottom_line)
+                    aglyph = None
                     glyph_ascii_code += 1
             caps = statistics_multimode(cap)
             bases = statistics_multimode(base)
