@@ -28,7 +28,7 @@ def encode_bytes(data):
 
 
 def get_string_to_inject(bytes_array):
-    return f"compressed_fonts_{parsed_command_line.encoding}=B'''{encode_bytes(bytes_array).decode()}'''"
+    return f"compressed_fonts_{parsed_command_line.encoding} = B'''{encode_bytes(bytes_array).decode()}'''"
 
 
 def create_compressed_data():
