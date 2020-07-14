@@ -276,7 +276,7 @@ A ' R' in the stroke data indicates a 'lift pen and move' instruction.'''
         self.__glyphs = {}
         self.__default_font_names_list = None
         self.__font_params = self._rednderopts({'xofs': 0, 'yofs': 0, 'scalex': 1, 'scaley': 1, 'spacing': 0, 'cap_line': -12, 'base_line': 9, 'bottom_line': 16})
-        if load_default_font:
+        if load_default_font is not None:
             self.load_default_font(load_default_font)
         else:
             self.read_from_string_lines(data_iterator=load_from_data_iterator)
