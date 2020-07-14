@@ -44,7 +44,7 @@ def create_compressed_data():
         parsed_command_line.default_font.close()
         ci_default_font_file = parsed_command_line.default_font.name.casefold()
     ci_fonts_in_folder.remove(ci_default_font_file)
-    ci_fonts_in_folder.insert(0,ci_default_font_file)
+    ci_fonts_in_folder.insert(0, ci_default_font_file)
     with tarfile.open(fileobj=compressed_file_stream, format=tarfile.GNU_FORMAT, mode='w|' + parsed_command_line.compression) as tar:
         print(f'Using default font file: "{ci_files_dict[ci_default_font_file]}"')
         for ci_file_name in ci_fonts_in_folder:

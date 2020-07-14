@@ -85,7 +85,7 @@ def main():
     if tarfile_base_name and the_bytes:
         print(f'Possible font resource found in "{search_resource_name}".')
         if parsed_command_line.save_tar:
-            with open(tarfile_base_name+'.tar', 'wb+') as output_file:
+            with open(tarfile_base_name + '.tar', 'wb+') as output_file:
                 output_file.write(the_bytes)
                 print(f'"{tarfile_base_name}.tar" successfully written.')
         if parsed_command_line.extract_fonts:
