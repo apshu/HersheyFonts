@@ -310,7 +310,7 @@ cap_line=-12, base_line= 9, bottom_line= 16'''
         '''Get the list of built-in fonts'''
         if not self.__default_font_names_list:
             with BytesIO(self.__get_compressed_font_bytes()) as compressed_file_stream:
-                with tarfile.open(fileobj=compressed_file_stream, mode='r', ) as ftar:
+                with tarfile.open(fileobj=compressed_file_stream, mode='r', encoding='utf-8') as ftar:
                     self.__default_font_names_list = list(map(lambda tar_member: tar_member.name, ftar.getmembers()))
             del ftar
             del compressed_file_stream
@@ -338,7 +338,7 @@ cap_line=-12, base_line= 9, bottom_line= 16'''
             default_font_name = self.default_font_names[0]
         if default_font_name in self.default_font_names:
             with BytesIO(self.__get_compressed_font_bytes()) as compressed_file_stream:
-                with tarfile.open(fileobj=compressed_file_stream, mode='r', ) as ftar:
+                with tarfile.open(fileobj=compressed_file_stream, mode='r', encoding='utf-8') as ftar:
                     tarmember = ftar.extractfile(default_font_name)
                     self.read_from_string_lines(tarmember)
                     return default_font_name
@@ -346,7 +346,7 @@ cap_line=-12, base_line= 9, bottom_line= 16'''
 
     def load_font_file(self, file_name):
         '''load font from external file'''
-        with open(file_name, 'r') as fin:
+        with open(file_name, 'r', encoding='utf-8') as fin:
             self.read_from_string_lines(fin)
 
     def read_from_string_lines(self, data_iterator=None, first_glyph_ascii_code=32, use_charcode=False, merge_existing=False):
@@ -354,7 +354,7 @@ cap_line=-12, base_line= 9, bottom_line= 16'''
 Parameters:
     - data_iterator : string list or empty to clear current font data
     - use_charcode : if True use the font embedded charcode parameter for glyph storage
-    - first_glyph_ascii_code : if use_charcode is Talse, use this ASCII code for the first character in font line
+    - first_glyph_ascii_code : if use_charcode is False, use this ASCII code for the first character in font line
     - merge_existing : if True merge the glyphs from data_iterator to the current font
     '''
         glyph_ascii_code = first_glyph_ascii_code
@@ -369,7 +369,7 @@ Parameters:
             self.__glyphs = {}
         if data_iterator:
             for line in data_iterator or '':
-                line = line.decode()
+                #line = line.decode()
                 if line[0] == '#':
                     extraparams = json.loads(line[1:])
                     if 'define_cap_line' in extraparams:
