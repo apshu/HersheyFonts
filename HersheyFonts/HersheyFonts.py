@@ -354,7 +354,7 @@ cap_line=-12, base_line= 9, bottom_line= 16'''
 Parameters:
     - data_iterator : string list or empty to clear current font data
     - use_charcode : if True use the font embedded charcode parameter for glyph storage
-    - first_glyph_ascii_code : if use_charcode is True, use this ASCII code for the first character in font line
+    - first_glyph_ascii_code : if use_charcode is False, use this ASCII code for the first character in font line
     - merge_existing : if True merge the glyphs from data_iterator to the current font
     '''
         glyph_ascii_code = first_glyph_ascii_code
@@ -372,7 +372,7 @@ Parameters:
                 if isinstance(line, str) and hasattr(line, 'decode'):
                     line = line.decode()
                 elif isinstance(line, bytes) and hasattr(line, 'decode'):
-                    line = line.decode("utf-8")
+                    line = line.decode('utf-8')
                 if line[0] == '#':
                     extraparams = json.loads(line[1:])
                     if 'define_cap_line' in extraparams:
