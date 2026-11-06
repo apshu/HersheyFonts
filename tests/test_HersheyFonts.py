@@ -85,3 +85,8 @@ class TestDefaultFonts(TestHersheyFonts):
                     font_file = ftar.extractfile(tar_member)
                     data = font_file.read()
                     self.assertGreater(len(data), 0, 'Empty font file wasting space in module')
+
+    def test_rowmant_capital_j_width(self):
+        self.font.load_default_font('rowmant')
+        glyph = next(iter(self.font.glyphs_for_text('J')))
+        self.assertEqual(glyph.char_width, 16, msg='rowmant "J" (glyph 3010) has wrong advance width')
